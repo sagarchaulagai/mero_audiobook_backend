@@ -1,0 +1,453 @@
+{
+  "source_genre_ids": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129,
+    130,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139,
+    140,
+    141,
+    142,
+    143,
+    144,
+    145,
+    146,
+    147
+  ],
+  "display_groups": {
+    "Action & Adventure": [
+      3,
+      37
+    ],
+    "Animals & Nature": [
+      21,
+      38,
+      77,
+      96
+    ],
+    "Anthologies": [
+      62,
+      75
+    ],
+    "Antiquity": [
+      4,
+      113,
+      123
+    ],
+    "Art": [
+      47,
+      78
+    ],
+    "Asian Antiquity": [
+      146
+    ],
+    "Atheism & Agnosticism": [
+      143
+    ],
+    "Bibles": [
+      56,
+      74,
+      79,
+      139,
+      140,
+      141,
+      142
+    ],
+    "Biography & Autobiography": [
+      80,
+      145
+    ],
+    "Business & Economics": [
+      81
+    ],
+    "Children's Fiction": [
+      1
+    ],
+    "Children's Non-fiction": [
+      2
+    ],
+    "Christian Fiction": [
+      26,
+      72
+    ],
+    "Christianity - Biographies": [
+      129
+    ],
+    "Christianity - Commentary": [
+      128
+    ],
+    "Christianity - Other": [
+      130
+    ],
+    "Cooking & Food": [
+      118
+    ],
+    "Crafts & Hobbies": [
+      82
+    ],
+    "Design & Architecture": [
+      78
+    ],
+    "Drama": [
+      24,
+      58
+    ],
+    "Dramatic Readings": [
+      7
+    ],
+    "Education": [
+      83
+    ],
+    "Epistolary Fiction": [
+      8
+    ],
+    "Espionage": [
+      33
+    ],
+    "Essays & Short Works": [
+      46,
+      84,
+      120,
+      121
+    ],
+    "Exploration": [
+      138
+    ],
+    "Family & Relationships": [
+      12,
+      40,
+      85
+    ],
+    "Fantasy": [
+      13,
+      55
+    ],
+    "Fictional Biographies & Memoirs": [
+      14
+    ],
+    "Foreign Language Study": [
+      112
+    ],
+    "Gardening": [
+      119
+    ],
+    "Gothic Fiction": [
+      17
+    ],
+    "Health & Fitness": [
+      86
+    ],
+    "Historical Fiction": [
+      18
+    ],
+    "History": [
+      42,
+      87,
+      144
+    ],
+    "Horror": [
+      16
+    ],
+    "House & Home": [
+      88
+    ],
+    "Humor": [
+      19,
+      57,
+      89
+    ],
+    "Law": [
+      90
+    ],
+    "Legends & Fairy Tales": [
+      11,
+      39
+    ],
+    "Letters": [
+      122
+    ],
+    "Literary Criticism": [
+      92
+    ],
+    "Mathematics": [
+      93
+    ],
+    "Medical": [
+      94
+    ],
+    "Medieval": [
+      114,
+      124
+    ],
+    "Memoirs": [
+      111
+    ],
+    "Music": [
+      95
+    ],
+    "Mystery & Thriller": [
+      5,
+      22,
+      33
+    ],
+    "Myths": [
+      11,
+      39
+    ],
+    "Nature": [
+      38,
+      96
+    ],
+    "Nautical & Marine Fiction": [
+      23
+    ],
+    "Performing Arts": [
+      97
+    ],
+    "Periodicals & Magazines": [
+      147
+    ],
+    "Philosophy": [
+      98
+    ],
+    "Poetry": [
+      25,
+      43,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71
+    ],
+    "Political Science": [
+      99
+    ],
+    "Politics": [
+      99
+    ],
+    "Psychology": [
+      100
+    ],
+    "Reference": [
+      49,
+      101
+    ],
+    "Religion": [
+      44,
+      50,
+      102,
+      131
+    ],
+    "Religious Fiction": [
+      26,
+      72
+    ],
+    "Romance": [
+      27,
+      59
+    ],
+    "Satire": [
+      29,
+      60
+    ],
+    "Science": [
+      51,
+      103,
+      132,
+      133,
+      134,
+      135
+    ],
+    "Science Fiction": [
+      30
+    ],
+    "Self Help": [
+      104
+    ],
+    "Short Stories": [
+      31
+    ],
+    "Single Author Collections": [
+      63,
+      76
+    ],
+    "Social Science": [
+      105
+    ],
+    "Sports & Recreation": [
+      106
+    ],
+    "Sports Fiction": [
+      32
+    ],
+    "Technology & Engineering": [
+      107
+    ],
+    "Tragedy": [
+      61
+    ],
+    "Transportation": [
+      137
+    ],
+    "Travel": [
+      108
+    ],
+    "Travel Fiction": [
+      10
+    ],
+    "True Crime": [
+      109
+    ],
+    "War & Military": [
+      73
+    ],
+    "War & Military Fiction": [
+      34
+    ],
+    "Western": [
+      35
+    ],
+    "Writing & Linguistics": [
+      110
+    ]
+  }
+}
