@@ -182,7 +182,7 @@ def parse_book(raw):
     genres = {positive_int(genre.get('id')) for genre in raw['genres'] if isinstance(genre, dict)}
     if len([g for g in raw['genres'] if isinstance(g, dict)]) != len(raw['genres']):
         raise BuildError(f'Project {project_id}: invalid genre')
-    return project_id, archive_id(raw.get('url_iarchive')), title, ', '.join(names), genres, languages(raw.get('language'))
+    return project_id, archive_id(raw.get('url_iarchive')), title, ', '.join(names), genres, languages(raw.get('language')), names
 
 
 def collect_librivox(db, client, *, page_size=500, max_pages=None):
@@ -204,7 +204,7 @@ def collect_librivox(db, client, *, page_size=500, max_pages=None):
             raise BuildError('LibriVox ignored the requested page limit')
         with db:
             for raw in records:
-                project, identifier, title, author, genres, book_languages = parse_book(raw)
+                project, identifier, title, author, genres, book_languages, author_names = parse_book(raw)
                 if project <= previous_id:
                     raise BuildError('LibriVox IDs repeated or moved backwards; start a fresh cache snapshot')
                 previous_id = project
@@ -213,6 +213,8 @@ def collect_librivox(db, client, *, page_size=500, max_pages=None):
                     continue
                 db.execute('INSERT INTO source_projects VALUES (?,?,?,?,?)',
                            (project, identifier, title, author, json.dumps(book_languages, ensure_ascii=False)))
+                db.executemany('INSERT INTO source_project_authors VALUES (?,?,?)',
+                               ((project, position, name) for position, name in enumerate(author_names)))
                 db.executemany('INSERT OR IGNORE INTO source_memberships VALUES (?,?)', ((project, genre) for genre in genres))
         pages += 1
         offset += len(records)
@@ -343,7 +345,11 @@ def materialize(db, config, profiles, popularity):
                        ((genre, rank, row[0]) for rank, row in enumerate(results, 1)))
     db.execute("INSERT INTO book_search(book_search) VALUES('rebuild')")
     db.execute("INSERT INTO book_search(book_search) VALUES('optimize')")
-    build_catalog_authors(db, profiles)
+    credits = db.execute('''SELECT b.id,a.name FROM source_project_authors a
+      JOIN source_projects p ON p.project_id=a.project_id
+      JOIN books b ON b.archive_id=p.archive_id
+      ORDER BY b.id,p.project_id,a.position''')
+    build_catalog_authors(db, profiles, credits=credits)
     return new_ids
 
 
@@ -382,6 +388,7 @@ def build(output, client, *, config, profiles=(), page_size=500, max_pages=None,
             db.executescript('''
               CREATE TABLE source_projects(project_id INTEGER PRIMARY KEY, archive_id TEXT, title TEXT, author TEXT,languages_json TEXT);
               CREATE INDEX source_project_archive ON source_projects(archive_id);
+              CREATE TABLE source_project_authors(project_id INTEGER,position INTEGER,name TEXT,PRIMARY KEY(project_id,position));
               CREATE TABLE source_memberships(project_id INTEGER,genre_id INTEGER,PRIMARY KEY(project_id,genre_id));
               CREATE INDEX source_member_genre ON source_memberships(genre_id,project_id);
               CREATE TABLE source_downloads(archive_id TEXT PRIMARY KEY,downloads INTEGER,avg_rating REAL,num_reviews INTEGER,languages_json TEXT);
@@ -404,16 +411,19 @@ def build(output, client, *, config, profiles=(), page_size=500, max_pages=None,
                     digest.update(json.dumps(row, ensure_ascii=False).encode('utf-8'))
                 for row in db.execute('SELECT * FROM source_memberships ORDER BY project_id,genre_id'):
                     digest.update(json.dumps(row).encode())
+                for row in db.execute('SELECT * FROM source_project_authors ORDER BY project_id,position'):
+                    digest.update(json.dumps(row, ensure_ascii=False).encode('utf-8'))
                 metadata = {
                     'schema_version': '2', 'source': LIBRIVOX, 'source_sha256': digest.hexdigest(),
                     'built_at': datetime.now(timezone.utc).isoformat(), 'partial': str(report['partial']).lower(),
                     'search_index': 'fts4/unicode61/external-content',
+                    'author_index': 'individual-librivox-authors-v1',
                     'popularity': 'Archive downloads descending; missing counts last; catalog ID breaks ties' if popularity == 'downloads' else 'LibriVox project ID ascending (NOT popularity)',
                     'genre_groups': json.dumps(config['display_groups'], ensure_ascii=False),
                     **{k: str(report[k]) for k in ('books', 'genres', 'genre_entries', 'authors')},
                 }
                 db.executemany('INSERT INTO catalog_metadata VALUES (?,?)', metadata.items())
-                for table in ('source_memberships', 'source_projects', 'source_downloads'):
+                for table in ('source_memberships', 'source_project_authors', 'source_projects', 'source_downloads'):
                     db.execute(f'DROP TABLE {table}')
                 validate(db)
             db.execute('VACUUM')
