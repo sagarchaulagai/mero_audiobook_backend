@@ -85,26 +85,27 @@
         {
             "playlistName": "Best Murder Mysteries",
             "archive_identifiers": [
-                "adventures_sherlock_holmes_librivox",
-                "memoirs_sherlock_holmes_librivox",
-                "return_sherlock_holmes_librivox",
+                "adventures_holmes",
                 "hound_baskervilles_librivox",
-                "valley_of_fear_librivox",
-                "study_in_scarlet_librivox",
+                "valleyoffear_1511_librivox",
+                "studyinscarlet_0811_librivox",
                 "sign_of_four_librivox",
                 "moonstone_0802_librivox",
                 "woman_white_0811_librivox",
                 "leavenworth_case_librivox",
-                "murders_in_the_rue_morgue_librivox",
-                "purloined_letter_librivox",
-                "mystery_of_the_yellow_room_librivox",
-                "mystery_edwin_drood_librivox",
-                "innocence_of_father_brown_librivox",
-                "tales_of_mystery_and_imagination_librivox",
-                "adventures_auguste_dupin_librivox",
-                "mystery_of_cora_librivox",
-                "detective_stories_librivox",
-                "mystery_of_a_hansom_cab_librivox"
+               "themurdersintheruemorgue_1401_librivox",
+               "breaking_point_1103_librivox",
+               "ghost_breaker_1204_librivox",
+               "mystery_hasty_arrow_1209",
+               "red_house_mystery_librivox",
+               "bat_0909_librivox",
+               "ladymolly_1104_librivox",
+               "man_lower_ten_1003_librivox",
+               "trents_last_case_kw_librivox",
+               "francesbaird_1209_librivox",
+               "silent_witness_1410_librivox",
+               "murder_gunroom_0902_librivox",
+               "malcolmsage_1006_librivox"
             ]
         }
     ]
