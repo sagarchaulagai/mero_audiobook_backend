@@ -35,6 +35,8 @@ LIBRIVOX = 'https://librivox.org/api/feed/audiobooks/'
 ARCHIVE = 'https://archive.org/advancedsearch.php'
 USER_AGENT = 'MeroCatalogBuilder/1.0 (LibriVox catalog synchronization)'
 ARCHIVE_FIELDS = ['identifier', 'downloads', 'avg_rating', 'num_reviews', 'language']
+PUBLISH_RETRIES = 10
+PUBLISH_RETRY_DELAY = 1.0
 
 
 class BuildError(Exception):
@@ -52,6 +54,18 @@ def atomic_json(path, value):
         os.replace(temporary, path)
     finally:
         Path(temporary).unlink(missing_ok=True)
+
+
+def publish_database(temporary, output):
+    """Replace the published database, tolerating transient Windows locks."""
+    for attempt in range(PUBLISH_RETRIES):
+        try:
+            os.replace(temporary, output)
+            return
+        except PermissionError:
+            if attempt == PUBLISH_RETRIES - 1:
+                raise
+            time.sleep(PUBLISH_RETRY_DELAY)
 
 
 class JsonClient:
@@ -429,15 +443,21 @@ def build(output, client, *, config, profiles=(), page_size=500, max_pages=None,
             db.execute('VACUUM')
             validate(db)
             db.commit()
-        os.replace(temporary, output)
+        publish_database(temporary, output)
         report.update(output=str(output), database_bytes=output.stat().st_size,
                       sha256=hashlib.sha256(output.read_bytes()).hexdigest(), popularity=popularity)
         atomic_json(Path(str(output) + '.report.json'), report)
         return report
     finally:
         if temporary is not None:
-            temporary.unlink(missing_ok=True)
-        lock.unlink(missing_ok=True)
+            try:
+                temporary.unlink(missing_ok=True)
+            except PermissionError:
+                pass
+        try:
+            lock.unlink(missing_ok=True)
+        except PermissionError:
+            pass
 
 
 def main():

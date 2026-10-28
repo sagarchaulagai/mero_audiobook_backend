@@ -46,7 +46,7 @@ def author_key(name):
     return ' '.join(words)
 
 
-def build_catalog_authors(db, profiles):
+def build_catalog_authors(db, profiles, credits=None):
     """One FTS entry per distinct credit, linked to an unambiguous profile."""
     db.execute('DROP TABLE IF EXISTS catalog_author_search')
     db.execute('DROP TABLE IF EXISTS catalog_author_books')
@@ -71,21 +71,25 @@ def build_catalog_authors(db, profiles):
     linked.update(canonical)  # Canonical names take precedence over noisy aliases.
     catalog_ids = {}
     first_catalog_id = max(entries, default=0) + 1
-    for book_id, name in db.execute('SELECT id,author FROM books ORDER BY id'):
+    seen_memberships = set()
+    credit_rows = credits if credits is not None else db.execute('SELECT id,author FROM books ORDER BY id')
+    for book_id, name in credit_rows:
         name = name.strip()
         key = author_key(name)
         if not key:
             continue
         identifier = linked.get(key)
         if identifier is None:
-            identifier = catalog_ids.setdefault(key, first_catalog_id + book_id)
+            identifier = catalog_ids.setdefault(key, first_catalog_id + len(catalog_ids))
             entries.setdefault(identifier, [name, None, set()])
         entries[identifier][2].add(name)
-        db.execute('INSERT INTO catalog_author_books VALUES (?,?)', (identifier, book_id))
+        membership = (identifier, book_id)
+        if membership not in seen_memberships:
+            db.execute('INSERT INTO catalog_author_books VALUES (?,?)', membership)
+            seen_memberships.add(membership)
     for identifier, (name, pop_id, aliases) in entries.items():
         db.execute('INSERT INTO catalog_authors VALUES (?,?,?)', (identifier, name, pop_id))
         db.execute('INSERT INTO catalog_author_search(docid,name,aliases) VALUES (?,?,?)',
                    (identifier, name, ' '.join(sorted(aliases))))
     db.execute("INSERT INTO catalog_author_search(catalog_author_search) VALUES('optimize')")
     db.execute("INSERT INTO catalog_author_search(catalog_author_search) VALUES('integrity-check')")
-
