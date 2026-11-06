@@ -93,19 +93,54 @@
                 "moonstone_0802_librivox",
                 "woman_white_0811_librivox",
                 "leavenworth_case_librivox",
-               "themurdersintheruemorgue_1401_librivox",
-               "breaking_point_1103_librivox",
-               "ghost_breaker_1204_librivox",
-               "mystery_hasty_arrow_1209",
-               "red_house_mystery_librivox",
-               "bat_0909_librivox",
-               "ladymolly_1104_librivox",
-               "man_lower_ten_1003_librivox",
-               "trents_last_case_kw_librivox",
-               "francesbaird_1209_librivox",
-               "silent_witness_1410_librivox",
-               "murder_gunroom_0902_librivox",
-               "malcolmsage_1006_librivox"
+                "themurdersintheruemorgue_1401_librivox",
+                "breaking_point_1103_librivox",
+                "ghost_breaker_1204_librivox",
+                "mystery_hasty_arrow_1209",
+                "red_house_mystery_librivox",
+                "bat_0909_librivox",
+                "ladymolly_1104_librivox",
+                "man_lower_ten_1003_librivox",
+                "trents_last_case_kw_librivox",
+                "francesbaird_1209_librivox",
+                "silent_witness_1410_librivox",
+                "murder_gunroom_0902_librivox",
+                "malcolmsage_1006_librivox"
+            ]
+        },
+        {
+            "playlistName": "Space Adventures",
+            "archive_identifiers": [
+                "star_born_mfs_librivox",
+                "columbus_space_1504_librivox",
+                "defiant_agents_1303_librivox",
+                "skylark_three_1103_librivox",
+                "rip_foster_gray_planet_mn_1502_librivox",
+                "lone_star_planet_0910_librivox",
+                "rebels_red_planet_0904_librivox",
+                "four_day_planet_1012_librivox",
+                "gods_mars3_1306",
+                "city_worlds_end_1203_librivox",
+                "men_moon_mfs_librivox",
+                "deathworld_gm_0904_librivox"
+            ]
+        },
+        {
+            "playlistName": "Sea Stories",
+            "archive_identifiers": [
+                "trawler_rm_1008_librivox",
+                "idylls_of_the_sea_2102_librivox",
+                "stolen_bacillus_1910_librivox",
+                "the_frozen_pirate_1911_librivox",
+                "sea_stories_1404_librivox",
+                "billybudd_2001_librivox",
+                "white_jacket_1104_librivox",
+                "redburn_1306_librivox",
+                "shipwreckoftheessex_1601_librivox",
+                "moby_dick_librivox",
+                "autobiography_seaman_1206_librivox",
+                "the_log_of_a_sea-waif_2104_librivox",
+                "tickencotetreasure_2010_librivox"
             ]
         }
     ]
